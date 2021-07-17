@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div class="bth-toolbar justify-content-between" role="toolbar">
+
+    <div class="btn-group md-3 mt-3" role="group">
+        <a id="addBtnBook" th:href="@{/references/addBook}" class="btn btn-success">Add</a>
+    </div>
+
+    <div class="input-group md-3 w-50 ms-auto">
+        <input id="searchParam" name="searchParam" type="text" class="form-control" aria-label="Search" aria-describedby="button-addon2"/>
+        <button onclick="findBooks()" id="searchBtn" class="btn btn-outline-secondary" type="button">Search</button>
+    </div>
+
+</div>
+
+
+</html>

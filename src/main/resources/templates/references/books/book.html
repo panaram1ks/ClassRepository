@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/header :: head(~{::script}, ~{})">
+    <script type="text/javascript" th:src="@{/js/references.js}"></script>
+</div>
+
+<div id="script">
+    <script type="text/javascript" th:src="@{/js/book.js}"></script>
+    <script type="text/javascript" th:src="@{/js/references.js}"></script>
+</div>
+
+
+
+
+
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 mt-5 md-5">
+            <div th:replace="references/books/actionBar"></div>
+            <div th:replace="references/books/bookTable :: book_list"></div>
+        </div>
+    </div>
+</main>
+
+</html>

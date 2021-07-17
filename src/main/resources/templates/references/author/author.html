@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:replace="fragments/header :: head(~{::script}, ~{})">
+      <script type="text/javascript" th:src="@{/js/author.js}"></script>
+    </div>
+
+<body>
+<main class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 mt-5 md-5">
+
+        <div class="btn-group md-3 mt-3" role="group">
+          <a th:href="@{references/addAuthor}" class="btn btn-success" id="addAuthorBtn">
+            Добавить
+          </a>
+        </div>
+
+<!--        <div class="input-group mb-3 w-50 ms-auto">-->
+<!--          <input type="text" class="form-control" aria-label="Search" aria-describedby="button-addon2">-->
+<!--          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>-->
+<!--        </div>-->
+        <div class="author_list">
+            <table class="table">
+
+              <div th:replace="fragments/alert"></div>
+
+              <thead class="table-secondary">
+              <tr>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Отчество</th>
+                <th scope="col">Удаление</th>
+              </tr>
+              </thead>
+              <tbody>
+              </tr>
+              <tr th:each="author : ${authors}" th:object="${author}">
+                <td th:text="*{lastName}"></td>
+                <td th:text="*{firstName}"></td>
+                <td th:text="*{middleName}"></td>
+                <td>
+                  <a th:href="@{delete/(pid=*{pid})}" class="btn btn-danger">Delete</a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+
+        <div class="modal fade" id="addAuthorModal" tabindex="-1"
+             role="dialog" area-hidden="true">
+        </div>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>

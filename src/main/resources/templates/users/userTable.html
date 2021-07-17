@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<div class="user_list" th:fragment="user_list" id="tableID">
+
+    <table class="table">
+        <div th:replace="fragments/alert"></div>
+
+        <thead class="table-secondary">
+            <tr>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Отчество</th>
+                <th scope="col">Логин</th>
+                <th scope="col">Роль</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Операции</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}" th:object="${user}">
+                <td th:text="*{lastName}"></td>
+                <td th:text="*{firstName}"></td>
+                <td th:text="*{middleName}"></td>
+                <td th:text="*{login}"></td>
+                <td th:text="*{rolesStr}"></td>
+                <td th:text="*{status}"></td>
+                <td>
+                    <a th:href="@{users/edit/(pid=*{pid})}" class="btn btn-warning editBtn">Edit</a>
+                    <a th:href="@{users/delete/(pid=*{pid})}" class="btn btn-danger deleteBtn">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="addModal" tabindex="-1"
+         role="dialog" area-hidden="true">
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1"
+         role="dialog" area-hidden="true">
+    </div>
+
+    <div th:replace="users/modal/deleteUser"></div>
+
+</div>
+
+
+</html>

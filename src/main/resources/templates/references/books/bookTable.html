@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<div class="book_list" th:fragment="book_list">
+
+
+    <table class="table">
+        <div th:replace="fragments/alert"></div>
+
+        <thead class="table-secondary">
+        <tr>
+            <th scope="col">Название книги</th>
+            <th scope="col">Автор</th>
+            <th scope="col">Количество листов</th>
+            <th scope="col">Колич книг в наличии</th>
+            <th scope="col">Редактирование</th>
+            <th scope="col">Удаление</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tr>
+        <tr th:each="book : ${books}" th:object="${book}">
+            <td th:text="*{name}"></td>
+            <td th:text="*{author}"></td>
+            <td th:text="*{getDateString()}"></td>
+            <td th:text="*{totalOfSheets}"></td>
+            <td th:text="*{totalOfBook}"></td>
+            <td><img style="height: 80px; width: 80px" th:src="@{/references/image(pid=*{pid})}" alt=""></td>
+            <td>
+                <a th:href="@{/references/editBook/(pid=*{pid})}" class="btn btn-warning editBook">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{/references/deleteBook/(pid=*{pid})}" class="btn btn-danger deleteBook">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="addModalBook" tabindex="-1"
+         role="dialog" area-hidden="true">
+    </div>
+
+    <div class="modal fade" id="editModalBook" tabindex="-1"
+         role="dialog" area-hidden="true">
+    </div>
+
+</div>
+
+
+
+</html>

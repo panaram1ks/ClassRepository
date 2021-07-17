@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Edit book</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+      <div class="custom-alert"></div>
+
+      <form id="edit_book" th:action="@{/references/saveBook}" th:object="${book}" method="post">
+        <input type="hidden" th:field="*{pid}" name="pid" id="edit_book_id">
+        <div class="mb-3">
+          <label for="name" class="form-label">Название</label>
+          <input type="text" name="name" class="form-control" id="name" required th:value="*{name}">
+        </div>
+        <div class="mb-3">
+          <label for="dateUpdate" class="form-label">Дата</label>
+          <input type="date" name="dateUpdate" class="form-control" id="dateUpdate" th:value="${updateDate}">
+        </div>
+        <div class="mb-3">
+          <label for="totalOfSheets" class="form-label">Всего листов</label>
+          <input type="number" name="totalOfSheets" class="form-control" id="totalOfSheets" required th:value="*{totalOfSheets}">
+        </div>
+        <div class="mb-3">
+          <label for="totalOfBook" class="form-label">Всего книг</label>
+          <input type="number" name="totalOfBook" class="form-control" id="totalOfBook" required th:value="*{totalOfBook}">
+        </div>
+        <div class="mb-3">
+          <label for="availableQuantity" class="form-label">Доступное количество</label>
+          <input type="number" name="availableQuantity" class="form-control" id="availableQuantity" required th:value="*{availableQuantity}">
+        </div>
+
+        <div class="mb-3">
+          <lable class="col-form-label">Автор</lable>
+          <select name="author" id="book-author" class="form-select"
+                  required th:field="*{author}">
+            <option th:each="author: ${authorList}"
+                    th:value="${author.getPid()}"
+                    th:text="${author.getLastNameInitials()}">
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <lable class="col-form-label">Жанр</lable>
+          <select name="genre" id="book-genre" class="form-select"
+                  required th:value="*{genre}">
+            <option th:each="genre: ${T(com.example.library2.model.Genre).values()}"
+                    th:text="${genre}"
+                    th:value="${genre}">
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-1 w-25 h-25">
+            <img alt="Нет обложки!" class="card-img" th:src="@{/references/image(pid=${book.pid})}"/>
+        </div>
+<!--        <div th:field="*{photo}"></div>-->
+
+<!--        <div class="mb-3">-->
+<!--          <lable class="col-form-label">Обложка</lable>-->
+<!--          <div style=" display: table-cell;">-->
+<!--            <div th:value=""></div>-->
+<!--            <div id="avatar" style="width: 100px; height: 100px"></div>-->
+<!--          </div>-->
+<!--          <input type="file" name="imgCover" accept="image/gif, image/jpeg, image/png" text="Выберите картинку">-->
+<!--        </div>-->
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+
+
+    </div>
+
+  </div>
+</div>
+
+</html>

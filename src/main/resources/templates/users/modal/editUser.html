@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="ModalLabel">Редактирование пользователя</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form id="edit_user" th:action="@{/users/updateUser}" th:object="${user}" method="post">
+                <input type="hidden" th:field="*{pid}" name="pid" id="edit_user_id">
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Фамилия</label>
+                    <input th:field="*{lastName}" type="text" name="lastName" class="form-control" id="lastName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="middleName" class="form-label">Имя</label>
+                    <input th:field="*{middleName}" type="text" name="middleName" class="form-control" id="middleName">
+                </div>
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">Отчество</label>
+                    <input th:field="*{firstName}" type="text" name="firstName" class="form-control" id="firstName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="login" class="form-label">Логин</label>
+                    <input th:field="*{login}" type="text" name="login" class="form-control" id="login" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Пароль</label>
+                    <input th:field="*{password}" type="password" name="password" class="form-control" id="password" required>
+                </div>
+
+                <div class="mb-3">
+                    <lable class="col-form-label">Роль:</lable>
+                    <select name="" id="user-roles" class="form-select" size="3" th:field="*{roles}"
+                            multiple="multiple" required>
+                        <option th:each="role: ${predefinedRoles}"
+                                th:value="${{role}}"
+                                th:text="${role.pid}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <lable class="col-form-label">Статус:</lable>
+                    <input th:field="*{status}" type="radio" class="ratio" name="status" required
+                           th:each="status: ${T(com.example.library2.model.Status).values()}"
+                           th:text="${status}"
+                           th:value="${status}"
+                    />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</html>

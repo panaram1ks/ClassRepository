@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="fragments/header :: head(~{}, ~{})"></div>
+<body>
+    <heater>
+        <div th:replace="fragments/nav-bar :: nav_bar"></div>
+    </heater>
+    <main class="container-fluid">
+        <div class="row mb-3">
+            <div th:each="book: ${books}" th:object="${book}" class="col-md-6">
+
+
+
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+
+                        <h3 class="mb-0" th:text="*{name}"></h3>
+                        <div class="mb-1 text-muted" th:text="*{genre}"></div>
+                        <p class="card-text mb-auto" th:text="*{author.getLastNameInitials()}"></p>
+                        <a th:href="@{rentBook/(pid=*{pid})}" class="btn btn-success">Забронировано</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img class="card-img" th:src="@{/references/image(pid=*{pid})}"
+                        style="width: 100px; height: 100px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer th:include="fragments/footer :: footer"></footer>
+</body>
+</html>
