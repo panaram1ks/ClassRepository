@@ -26,7 +26,7 @@ public class User {
     private String middleName;
 
     @Column(nullable = false, length = 100)
-    private String lastName;
+    private String lastName3;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinTable(name = "users_roles")
@@ -76,12 +76,12 @@ public class User {
         this.middleName = middleName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastName3() {
+        return lastName3;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName3(String lastName) {
+        this.lastName3 = lastName;
     }
 
     public List<Role> getRoles() {
